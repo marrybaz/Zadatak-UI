@@ -1,171 +1,141 @@
-
-// // switch
-// switch (7) {
-//     case 0:
-//       day = "Sunday";
-//       break;
-//     case 1:
-//       day = "Monday";
-//       break;
-//     case 2:
-//        day = "Tuesday";
-//       break;
-//     case 3:
-//       day = "Wednesday";
-//       break;
-//     case 4:
-//       day = "Thursday";
-//       break;
-//     case 5:
-//       day = "Friday";
-//       break;
-//     case 6:
-//       day = "Saturday";
-//       break;
-//       default:
-//       day = "nije pronasao dan";
-//   } 
-//   console.log(day);
-
-//   for petlja
-// for(i=1;i<=10;i++) {
-//     console.log(i);
-// }
-
-// var j=0;
-// while(j < 10) {
-//     console.log(j);
-//     j++;
-// }
-// //zadatak  prvi nacin
-// for(i=0;i<=10;i++) {
-//     if (i % 2 == 0){
-//         console.log(i + ' je paran broj');
-//     }
-//     else{
-//         console.log(i + ' je neparan broj');
-//     }
-// }
-
-// zadatak drugi nacin
-// var i = 0;
-// while (i <= 10) {
-//     if (i % 2 == 0){
-//         console.log(i + ' je paran broj');
-//     }else{
-//         console.log(i + ' je neparan broj');
-//     }
-//     i++;
-// }
-
-// II zadatak
-
-// var maxVrednost=parseInt(prompt('unesite vas maksimalni broj'));
-// var rezultat=0;
-// // console.log(maxVrednost);
-// for(i=0; i<=maxVrednost; i+=5) {
-//     rezultat = i + rezultat;
-//     }
-//    console.log(rezultat);
-
-// III zadatak
-
-// var maxVrednost = parseInt(prompt('unesite vas maksimalni broj'));
-// var rezultat = 0;
-// var t0 = performance.now();
-// // console.log(maxVrednost);
-// for (var i = 1; i <= maxVrednost; i++) {
-//     if (i % 2 == 0) {
-//         rezultat = i + rezultat;
-//     }
-// }
-// var t1 = performance.now();
-// console.log(rezultat);
-// console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.")
-
-// rezultat = 2;
-// t0 = performance.now();
-// if ((maxVrednost <2) || isNaN(maxVrednost)) {
-//     rezultat=null;
-// } else if (maxVrednost>3) {
-//     for (i = 4; i <=maxVrednost; i+=2) {
-//         rezultat += i;        
-//     }
-// }
-// t1 = performance.now();
+let d = id => document.getElementById(id);
+let c = id => document.getElementsByClassName(id);
 
 
-// console.log(rezultat);
-// console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.")
+let b = cs => {
+    bar.animate(cs);
+    let pt = c('progressbar-text')[0];
+    if (cs == 1) {
+        pt.classList.add('fullbar')
+    } else {
+        pt.classList.remove('fullbar')
+    }
 
-// t0 = performance.now();
-// if ((maxVrednost <2) || isNaN(maxVrednost)) {
-//     rezultat=null;
-// } else if (maxVrednost>3) {
-//     var n;
-//     if (maxVrednost % 2 ==0) {
-//         n = (2+maxVrednost)/2 - 1;
-//     } else {
-//         n = (2+(maxVrednost-1))/2 - 1;
-//     }
-//     rezultat=n*(n+1);
-// }
-// t1 = performance.now();
+};
+
+let currentStatus = 0;
+let emailEntered = false;
+let firstEntered = false;
+let lastEntered = false;
+let radioEntered = false;
+let checkAnimHtml = '<div class="spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>';
+
+let bar = new ProgressBar.Circle('#progress-bar', {
+    color: '#fff',
+
+    strokeWidth: 6,
+    trailWidth: 1,
+    easing: 'easeInOut',
+    duration: 1400,
+    text: {
+        autoStyleContainer: false
+    },
+    from: { color: '#fff', width: 1 },
+    to: { color: '#fff', width: 6 },
+
+    step: function (state, circle) {
+        circle.path.setAttribute('stroke', state.color);
+        circle.path.setAttribute('stroke-width', state.width);
+
+        var value = Math.round(circle.value() * 100);
+        circle.setText(value + '%');
+
+    }
+});
+bar.text.style.fontFamily = '"Raleway", Helvetica, sans-serif';
+bar.text.style.fontSize = '1rem';
+
+d('email').addEventListener('focus', function () {
+    d('email').removeAttribute('placeholder');
+    d('visible').style.visibility="visible";
+});
 
 
-// console.log(rezultat);
-// console.log("Call to doSomething took " + (t1 - t0) + " milliseconds.");
+d('email').addEventListener('focusout', function () {
+    let e = d('email').value;
+    if (e.length === 0 || (emailEntered && !d('email').checkValidity())) {
+        emailEntered = false;
+        d('email-num').innerHTML = 3;
+        if (currentStatus > 0) {
+            currentStatus -= 0.25;
+        }
+    } else {
+        if (emailEntered === false && d('email').checkValidity()) {
+            currentStatus += 0.25;
+            emailEntered = true;
+            d('email-num').innerHTML = checkAnimHtml;
+            setTimeout(function () { d('email-num').innerHTML = '<i class="fas fa-check"></i>'; }, 2000);
 
-// I zadatak
-// var i = 7;
-// var n = 0;
-// while (i <= 48) {
-//     if (i % 5 == 0){
-//      n++;
-//     }  
-//     i++;
-// }
-//  console.log(n);
+        }
 
-//  II zadatak
-// var lice=(prompt('Da li ste pravno lice (da ili ne)'));
-// var stanjeRacuna=parseInt(prompt('unesite stanje racuna'));
-// var cenaTelefona=parseInt(prompt('unesite cenu telefona'));
-// var x;
-// var PDV = 1.2;
-//     if (lice="da"){
-//         x = stanjeRacuna/cenaTelefona;
-//     document.getElementById('demo').innerHTML='Mozete kupiti ' + x + ' telefona';
-// }else if (lice="ne"){
-//     x= stanjeRacuna/(cenaTelefona*PDV);
-//     document.getElementById('demo').innerHTML='Mozete kupiti ' + x + ' telefona';
-// }
-    
-// var pdv;
-// var lice=(prompt('Da li ste fizicko lice (da ili ne)',"da"));
-// var stanje=parseInt(prompt('unesite stanje racuna'));
-// var cena=parseInt(prompt('unesite cenu telefona'));
-// var rezultat=0;
-// if (lice=="da") {
-//     pdv = 1.2;
-// }else{
-//     pdv = 1;
-// }
-    
-// while(cena*pdv<=stanje){
-//         rezultat++;
-//         stanje-=cena*pdv;
-//         console.log(stanje);
-//         document.write('Kupljen je: ' + rezultat + "<br>");
-//     }
+    }
+    b(currentStatus);
+});
 
-// document.getElementById("racun").addEventListener("click", function () {
-//     var kredit = parseInt(document.getElementById("kredit").value);
-//     var ucesce = parseInt(document.getElementById("ucesce").value);
-//     var rok = parseInt(document.getElementById("rok").value);
-//     var kamata = parseInt(document.getElementById("kamata").value);
-//     kamata = 1 + kamata / 100;
-//     var rata = ((kredit - ucesce) / rok) * kamata;
-//     document.getElementById("rata").value = rata;
-   
-// }); 
+d('first').addEventListener('focusout', function () {
+    let e = d('first').value;
+    if (e.length === 0 || (firstEntered && !d('first').checkValidity())) {
+        d('first-num').innerHTML = 1;
+        firstEntered = false;
+        if (currentStatus > 0) {
+            currentStatus -= 0.25;
+        }
+    } else {
+        if (firstEntered === false && d('first').checkValidity()) {
+            currentStatus += 0.25;
+            firstEntered = true;
+            d('first-num').innerHTML = checkAnimHtml;
+            setTimeout(function () { d('first-num').innerHTML = '<i class="fas fa-check"></i>'; }, 2000);
+
+        }
+
+    }
+    b(currentStatus);
+});
+
+d('last').addEventListener('focusout', function () {
+    let e = d('last').value;
+    if (e.length === 0 || (lastEntered && !d('last').checkValidity())) {
+        d('last-num').innerHTML = 2;
+        lastEntered = false;
+        if (currentStatus > 0) {
+            currentStatus -= 0.25;
+        }
+    } else {
+        if (lastEntered === false && d('last').checkValidity()) {
+            currentStatus += 0.25;
+            lastEntered = true;
+            d('last-num').innerHTML = checkAnimHtml;
+            setTimeout(function () { d('last-num').innerHTML = '<i class="fas fa-check"></i>'; }, 2000);
+
+        }
+
+    }
+    b(currentStatus);
+});
+
+d('mon').addEventListener('change', function () {
+    if (radioEntered === false) {
+        currentStatus += 0.25;
+        radioEntered = true;
+        d('radio-num').innerHTML = checkAnimHtml;
+        setTimeout(function () { d('radio-num').innerHTML = '<i class="fas fa-check"></i>'; }, 2000);
+    }
+
+
+    b(currentStatus);
+})
+
+d('tue').addEventListener('change', function () {
+    if (radioEntered === false) {
+        currentStatus += 0.25;
+        radioEntered = true;
+        d('radio-num').innerHTML = checkAnimHtml;
+        setTimeout(function () { d('radio-num').innerHTML = '<i class="fas fa-check"></i>'; }, 2000);
+    }
+
+    b(currentStatus);
+
+})
+
+
