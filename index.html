@@ -9,10 +9,15 @@
     <!--  -->
     <link rel="stylesheet" type="text/css" media="screen" href="bootstrap/bootstrap.min.css" />
     <script src="bootstrap/jquery.js"></script>
+    <script src="js/progressbar.js"></script>
     <script src="bootstrap/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+        crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/radial.css" />
 
 </head>
 
@@ -20,51 +25,102 @@
 
     <div class="container">
         <div class="row blue">
-            <div class="col-md-12 col-sm-12">
+            <div class="col-sm-2 col-2">
+                <div id="progress-bar"></div>
+            </div>
+            <div class="col-sm-10 col-10">
                 <p>New York State</p>
                 <h4>Request for Contact</h4>
             </div>
         </div>
-        <div class="row grey">
-            <div class="col-md-12 col-sm-12">
-                <form action="">
-                    <div class="flex">
-                        <div class="flex-item">
-                            <label for="name">First Name:</label><br>
-                            <input id="name" name="name" type="text">
-                            <hr>
-                        </div>
-                        <div class="flex-item">
-                            <label for="last">Last Name:</label><br>
-                            <input id="last" name="last" type="text">
-                            <hr>
-                        </div>
-                        <div class="flex-item">
-                            <label for="name">Email Address:</label><br>
-                            <input id="name" name="email" type="email">
-                            <hr>
-                        </div>
-                        <div class="flex-item">
-
-                            <p>What is the best time to contact you?</p>
-                            <input class="radio" type="radio" name="time" value="monday"> Monday 3pm<br>
-                            <input class="radio" type="radio" name="time" value="tuesday"> Tuesday 3pm<br>
-                        </div>
-                        <div class="flex-item">
-                            <input type="submit" value="SUBMIT">
+        <form action="">
+            <div class="row grey">
+                <div class="col-sm-2 col-2">
+                    <div class="circle">
+                        <span class="fa-stack fa-1x">
+                            <i class="fa fa-circle-o fa-stack-2x"></i>
+                            <strong id="first-num" class="fa-stack-1x">1</strong>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-10 col-10">
+                    <label for="first">First Name</label><br>
+                    <input id="first" name="name" type="text" minlength="2" required>
+                </div>
+            </div>
+            <div class="row grey">
+                <div class="col-sm-2 col-2">
+                    <div class="circle">
+                        <span class="fa-stack fa-1x">
+                            <i class="fa fa-circle-o fa-stack-2x"></i>
+                            <strong id="last-num" class="fa-stack-1x">2</strong>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-10 col-10">
+                    <label for="last">Last Name</label><br>
+                    <input id="last" name="last" type="text" minlength="2" required>
+                </div>
+            </div>
+            <div class="row grey">
+                <div class="col-sm-2 col-2">
+                    <div class="circle">
+                        <span class="fa-stack fa-1x">
+                            <i class="fa fa-circle-o fa-stack-2x"></i>
+                            <strong id="email-num" class="fa-stack-1x">3</strong>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-10 col-10">
+                    <label id="visible" for="email">Email Address</label><br>
+                    <input id="email" name="email" type="email" placeholder="Email Address">
+                </div>
+            </div>
+            <div class="row grey">
+                <div class="col-sm-2 col-2">
+                    <div class="circle">
+                        <span class="fa-stack fa-1x">
+                            <i class="fa fa-circle-o fa-stack-2x"></i>
+                            <strong id="radio-num" class="fa-stack-1x">4</strong>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-10 col-10">
+                    <p>What is the best time to contact you?</p>
+                    <div class="pretty p-icon p-round p-smooth">
+                        <input id="mon" class="radio" type="radio" name="time" value="monday">
+                        <div class="state p-primary">
+                            <i class="icon fa fa-check-circle"></i>
+                            <label>Monday 3pm</label>
                         </div>
                     </div>
-                </form>
+                    <div class="pretty p-icon p-round p-smooth">
+                        <input id="tue" class="radio" type="radio" name="time" value="tuesday">
+                        <div class="state p-primary">
+                            <i class="icon fa fa-check-circle"></i>
+                            <label>Tuesday 3pm</label>
+                        </div>
+                    </div>
 
+                </div>
             </div>
+            <div class="row grey">
+                <div class="col-sm-12 col-12 submit">
+                    <input id="submit" type="submit" value="SUBMIT">
+                </div>
+            </div>
+        </form>
 
-        </div>
+
+    </div>
 
 
-        <script>
 
 
-        </script>
+
+
+    <script src="js/main.js"></script>
+
 </body>
 
 </html>
